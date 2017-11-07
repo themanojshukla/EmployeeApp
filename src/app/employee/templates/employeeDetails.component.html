@@ -1,0 +1,66 @@
+<div *ngIf='employee; else elseBlock'>
+    <div class="panel panel-primary">
+        <div class="panel-heading">Update Employee for ID: EMP00{{employee.id}} </div>
+        <div class='panel-body' style="text-align: center">
+            <div>
+                <form (ngSubmit)="onSubmit()">
+                    <div>
+                        <label>First Name</label>
+                        <input type="text" value={{employee.firstName}} class="form-control" />
+                    </div>
+
+                    <div>
+                        <label>Middle Name</label>
+                        <input type="text" value={{employee.middleName}} class="form-control">
+                    </div>
+
+                    <div>
+                        <label>Last Name</label>
+                        <input type="text" value={{employee.lastName}} class="form-control">
+                    </div>
+
+                    <div>
+                        <label>Date of Birth</label>
+                        <input type="text" value={{employee.dateOfBirth}} class="form-control">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Update
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<ng-template #elseBlock>
+    <div class="panel panel-primary">
+        <div class="panel-heading">Add New Employee</div>
+        <div class='panel-body' style="text-align: center">
+            <div>
+                <form (ngSubmit)="onSubmit()">
+                    <div>
+                        <label>First Name</label>
+                        <input type="text" class="form-control" />
+                    </div>
+
+                    <div>
+                        <label>Middle Name</label>
+                        <input type="text" class="form-control">
+                    </div>
+
+                    <div>
+                        <label>Last Name</label>
+                        <input type="text" class="form-control">
+                    </div>
+
+                    <div>
+                        <label>Date of Birth</label>
+                        <input type="date" class="form-control">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Submit
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</ng-template>

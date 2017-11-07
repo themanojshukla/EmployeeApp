@@ -1,0 +1,43 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        List of Employees
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-2"><button class="btn btn-primary" (click)='onRowSelection()'>+</button> &nbsp;&nbsp;Filter By : </div>
+            <div class="col-md-4"><input [(ngModel)]='filterString' (ngModelChange)='onFilterChange($event)' type="text"></div>
+            <div class="col-md-2"><strong>Filtered By : </strong></div>
+            <div class="col-md-4"><strong>{{filterString}}</strong></div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="table-responsive col-md-8">
+                <table class="table table-striped">
+                    <thead style="background-color: #5ea7e2">
+                        <tr>
+                            <td>Sr. No.</td>
+                            <td>Employee ID</td>
+                            <td>First Name</td>
+                            <td>Middle Name</td>
+                            <td>Shukla Name</td>
+                            <td>Date Of Birth</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor='let employee of filteredEmployees; let i=index; ' (click)='onRowSelection(employee)'>
+                            <td>{{i+1}}</td>
+                            <td>{{"EMP00"+employee.id}}</td>
+                            <td>{{employee.firstName}}</td>
+                            <td>{{employee.middleName}}</td>
+                            <td>{{employee.lastName}}</td>
+                            <td>{{employee.dateOfBirth}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-4">
+                <employee-details [employee]='selectedEmployee'></employee-details>
+            </div>
+        </div>
+    </div>
+</div>
