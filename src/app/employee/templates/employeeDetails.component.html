@@ -3,29 +3,34 @@
         <div class="panel-heading">Update Employee for ID: EMP00{{employee.id}} </div>
         <div class='panel-body' style="text-align: center">
             <div>
-                <form (ngSubmit)="onSubmit()">
+                <form (ngSubmit)="onUpdate()" [formGroup]="updateForm">
                     <div>
                         <label>First Name</label>
-                        <input type="text" value={{employee.firstName}} class="form-control" />
+                        <input type="text" formControlName="firstName" value={{employee.firstName}} class="form-control" />
+                        <div class="errorMessage" *ngIf="updateForm.controls.firstName.touched && !updateForm.controls.firstName.valid">First Name is required</div>
                     </div>
 
                     <div>
                         <label>Middle Name</label>
-                        <input type="text" value={{employee.middleName}} class="form-control">
+                        <input type="text" formControlName="middleName" value={{employee.middleName}} class="form-control">
+                        <div class="errorMessage" *ngIf="updateForm.controls.middleName.touched && !updateForm.controls.middleName.valid">Middle Name is required</div>
                     </div>
 
                     <div>
                         <label>Last Name</label>
-                        <input type="text" value={{employee.lastName}} class="form-control">
+                        <input type="text" formControlName="lastName" value={{employee.lastName}} class="form-control">
+                        <div class="errorMessage" *ngIf="updateForm.controls.lastName.touched && !updateForm.controls.lastName.valid">Last Name is required</div>
                     </div>
 
                     <div>
                         <label>Date of Birth</label>
-                        <input type="text" value={{employee.dateOfBirth}} class="form-control">
+                        <input type="text" formControlName="dateOfBirth" value={{employee.dateOfBirth}} class="form-control">
+                        <div class="errorMessage" *ngIf="updateForm.controls.dateOfBirth.touched && !updateForm.controls.dateOfBirth.valid">Date of Birth is required</div>
                     </div>
 
                     <button type="submit" class="btn btn-primary">Update
-                    </button>
+                    </button> &nbsp;
+                    <button (click)="deleteEmp(i)" class="btn btn-danger">Delete</button>
                 </form>
             </div>
         </div>
@@ -36,7 +41,7 @@
         <div class="panel-heading">Add New Employee</div>
         <div class='panel-body' style="text-align: center">
             <div>
-                <form (ngSubmit)="onSubmit()">
+                <!-- <form (ngSubmit)="onSubmit()">
                     <div>
                         <label>First Name</label>
                         <input type="text" class="form-control" />
@@ -59,7 +64,32 @@
 
                     <button type="submit" class="btn btn-primary">Submit
                     </button>
-                </form>
+                </form> -->
+                <form (ngSubmit)="onSubmit()" [formGroup]="form">
+                        <div class="form-row">
+                            <div class="formHeading">First Name</div>
+                            <input type="text" id="firstName" formControlName="firstName"  class="form-control">
+                            <div class="errorMessage" *ngIf="form.controls.firstName.touched && !form.controls.firstName.valid">First Name is required</div>
+                        </div>
+                        <div class="form-row">
+                                <div class="formHeading">Middle Name</div>
+                                <input type="text" id="middleName" formControlName="middleName"  class="form-control">
+                                <div class="errorMessage" *ngIf="form.controls.middleName.touched && !form.controls.middleName.valid">Middle Name is required</div>
+                        </div>
+                        <div class="form-row">
+                                <div class="formHeading">Last Name</div>
+                                <input type="text" id="lastName" formControlName="lastName"  class="form-control">
+                                <div class="errorMessage" *ngIf="form.controls.lastName.touched && !form.controls.lastName.valid">Last Name is required</div>
+                        </div>
+                        <div class="form-row">
+                                <div class="formHeading">Date Of Birth</div>
+                                <input type="date" id="dateOfBirth" formControlName="dateOfBirth"  class="form-control">
+                                <div class="errorMessage" *ngIf="form.controls.dateOfBirth.touched && !form.controls.dateOfBirth.valid">Date of Birth is required</div>
+                        </div>
+                        <div class="form-row">
+                            <button type="submit"  class="btn btn-primary" [disabled]="!form.valid">Save</button>
+                        </div>
+                    </form>
             </div>
         </div>
     </div>
