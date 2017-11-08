@@ -5,7 +5,7 @@ import { NgModule } from '@angular/core';
 @Component({
     selector: 'employee-list',
     templateUrl: './../templates/employeeList.component.html',
-    //styleUrls: ['./employee/css/employeeList.component.css']
+    styleUrls: ['./../css/employeeList.component.css']
 })
 
 export class EmployeeListComponent {
@@ -71,6 +71,15 @@ export class EmployeeListComponent {
         this.selectedEmployee = employee;
     }
 
+    key: string = 'id'; // default sorting option
+    reverse: boolean = false;
+    
+    sort(key){
+      this.key = key;
+      this.reverse = !this.reverse;
+    }
+
+    p: number = 1;
     // filtering only on firstName
     //el =>  el.firstName.toLowerCase().indexOf(filterBy.toLowerCase()) > -1); 
 

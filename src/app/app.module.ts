@@ -4,6 +4,9 @@ import { AppComponent } from './app.component';
 import { EmployeeListComponent } from './employee/components/employeeList.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EmployeeDetailsComponent } from './employee/components/employeeDetails.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { Ng2OrderModule } from 'ng2-order-pipe';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 
 @NgModule({
@@ -11,7 +14,7 @@ import { EmployeeDetailsComponent } from './employee/components/employeeDetails.
     AppComponent,EmployeeListComponent,EmployeeDetailsComponent
   ],
   imports: [
-    BrowserModule,FormsModule, ReactiveFormsModule
+    BrowserModule,FormsModule, ReactiveFormsModule, Ng2SearchPipeModule, Ng2OrderModule, NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

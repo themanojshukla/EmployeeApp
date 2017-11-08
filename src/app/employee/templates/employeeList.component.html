@@ -4,10 +4,10 @@
     </div>
     <div class="panel-body">
         <div class="row">
-            <div class="col-md-2"><button class="btn btn-primary" (click)='onRowSelection()'>+</button> &nbsp;&nbsp;Filter By : </div>
-            <div class="col-md-4"><input [(ngModel)]='filterString' (ngModelChange)='onFilterChange($event)' type="text"></div>
-            <div class="col-md-2"><strong>Filtered By : </strong></div>
-            <div class="col-md-4"><strong>{{filterString}}</strong></div>
+            <div class="col-md-2"><button class="btn btn-primary" (click)='onRowSelection()'>+ Add New Employee</button></div> 
+            <div class="col-md-4">&nbsp;&nbsp;Filter By : <input  [(ngModel)]='filterString'  type="text" /></div>
+            <!-- (ngModelChange)='onFilterChange($event)' -->
+            <div class="col-md-2"><strong>Filtered By : {{filterString}}</strong></div>
         </div>
         <br>
         <div class="row">
@@ -16,15 +16,25 @@
                     <thead style="background-color: #5ea7e2">
                         <tr>
                             <td>Sr. No.</td>
-                            <td>Employee ID</td>
-                            <td>First Name</td>
-                            <td>Middle Name</td>
-                            <td>Shukla Name</td>
-                            <td>Date Of Birth</td>
+                            <td (click)="sort('id')">Employee ID
+                                <span class="glyphicon sort-icon" *ngIf="key =='id'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                            </td>
+                            <td (click)="sort('firstName')">First Name
+                                <span class="glyphicon sort-icon" *ngIf="key =='firstName'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                            </td>
+                            <td (click)="sort('middleName')">Middle Name
+                                <span class="glyphicon sort-icon" *ngIf="key =='middleName'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                            </td>
+                            <td (click)="sort('lastName')">Last Name
+                                <span class="glyphicon sort-icon" *ngIf="key =='lastName'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                            </td>
+                            <td (click)="sort('dateOfBirth')">Date Of Birth
+                                <span class="glyphicon sort-icon" *ngIf="key =='dateOfBirth'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                            </td>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor='let employee of filteredEmployees; let i=index; ' (click)='onRowSelection(employee)'>
+                        <tr *ngFor='let employee of filteredEmployees | orderBy: key : reverse  | filter:filterString | paginate: { itemsPerPage: 20, currentPage: p }; let i=index;' (click)='onRowSelection(employee)'>
                             <td>{{i+1}}</td>
                             <td>{{"EMP00"+employee.id}}</td>
                             <td>{{employee.firstName}}</td>
@@ -33,6 +43,7 @@
                             <td>{{employee.dateOfBirth}}</td>
                         </tr>
                     </tbody>
+                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
                 </table>
             </div>
             <div class="col-md-4">
