@@ -38,23 +38,28 @@ export class EmployeeDetailsComponent {
         }
     }
 
+    resetAddForm(): void {
+        let group:any = {};
+        group.firstName =  new FormControl('', Validators.required);
+        group.middleName = new FormControl('', Validators.required);
+        group.lastName = new FormControl('', Validators.required);
+        group.dateOfBirth = new FormControl('',Validators.required);
+        this.form = new FormGroup(group);   
+    }
 
    constructor() {
-       let group:any = {};
-       group.firstName =  new FormControl('', Validators.required);
-       group.middleName = new FormControl('', Validators.required);
-       group.lastName = new FormControl('', Validators.required);
-       group.dateOfBirth = new FormControl('',Validators.required);
-       this.form = new FormGroup(group);    
+        this.resetAddForm();
    }
 
    onSubmit() {
        this.payLoad = this.form.value;
        new EmployeeDetailsComponent();
        var temp : any[]= this.employees;
-       this.payLoad.id = temp.length+1;
+       var last = temp.length-1;
+       this.payLoad.id = temp[last].id+1;
        temp.push(this.payLoad );
        this.notify.emit(temp);
+        this.resetAddForm();
        
    }
 
@@ -70,7 +75,6 @@ export class EmployeeDetailsComponent {
        
        var temp : any[]= this.employees;
        var objIndex = temp.findIndex((obj => obj.id == this.payLoad.id ));
-       console.log(objIndex);
        temp[objIndex].firstName = this.payLoad.firstName;
        temp[objIndex].middleName = this.payLoad.middleName;
        temp[objIndex].lastName = this.payLoad.lastName;
