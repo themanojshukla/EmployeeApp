@@ -28,10 +28,10 @@ export class EmployeeListComponent {
         }
     ];
 
-    filterString: String;
+    filterString: String ='';
     filteredEmployees: any[];
     selectedEmployee: any;
-
+    isEmpty: boolean = false;
     // Filter effects won't be seen on employee Id column as the string 'EMP00' 
     // is being appended from the html template, not available in employees array.
     // However, the effects can be observed if the filterBy contains any match to
@@ -65,10 +65,32 @@ export class EmployeeListComponent {
     //         }
     //     );
     // }
+
+    // onFilterChange(){
+    //     console.log(this.isEmpty);
+    //     var str = this.filterString.trim();
+    //     console.log( this.filteredEmployees);
+    //     if(str.length > 0 && this.filteredEmployees.length < 1){
+    //         console.log( this.filteredEmployees);
+    //         this.isEmpty = true;
+    //     }else{
+    //         this.isEmpty = false;
+    //     }
+    //     console.log(this.isEmpty);
+    // }
     
     onNotify(newEmployees: any): void{
         this.filteredEmployees = newEmployees;
         this.selectedEmployee = null;
+        console.log(this.filteredEmployees.length)
+        // if(this.filteredEmployees.length > 0){
+        //     this.isEmployeesEmpty = false;
+        //     console.log(this.isEmployeesEmpty)
+        // }
+        // else{
+        //     this.isEmployeesEmpty = true;
+        // }
+        // console.log(this.isEmployeesEmpty)
     }
 
     onRowSelection(employee){
@@ -89,6 +111,15 @@ export class EmployeeListComponent {
 
     constructor() {
         this.filteredEmployees = this.employees;
+        console.log(this.filteredEmployees.length)
+        // if(this.filteredEmployees.length > 0){
+        //     this.isEmployeesEmpty = false;
+        //     console.log(this.isEmployeesEmpty)
+        // }
+        // else{
+        //     this.isEmployeesEmpty = true;
+        // }
+        // console.log(this.isEmployeesEmpty)
     }
 
 }
