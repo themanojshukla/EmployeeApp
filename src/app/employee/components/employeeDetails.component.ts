@@ -55,16 +55,26 @@ export class EmployeeDetailsComponent {
        this.payLoad = this.form.value;
        new EmployeeDetailsComponent();
        var temp : any[]= this.employees;
-       var last = temp.length-1;
-       this.payLoad.id = temp[last].id+1;
+
+       var length = temp.length;
+       var last;
+       if(length === 0){
+        this.payLoad.id = 1;
+       }
+       else{
+        last= length-1;
+        this.payLoad.id = temp[last].id+1;
+       }
+      
        temp.push(this.payLoad );
        this.notify.emit(temp);
         this.resetAddForm();
        
    }
 
-   deleteEmp(index){
+   deleteEmp(id){
     var temp : any[]= this.employees;
+    var index = temp.findIndex((obj => obj.id == id ));
     temp.splice(index, 1);
     console.log(temp);
     this.notify.emit(temp);

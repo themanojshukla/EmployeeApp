@@ -5,7 +5,7 @@
     <div class="panel-body">
         <div class="row">
             <div class="col-md-2"><button class="btn btn-primary" (click)="onRowSelection(null)">+ Add New Employee</button></div> 
-            <div class="col-md-4">&nbsp;&nbsp;Filter By : <input  [(ngModel)]='filterString'  type="text" /></div>
+            <div class="col-md-4">&nbsp;&nbsp;Filter By : <input [(ngModel)]='filterString'  type="text" /></div>
             <!-- (ngModelChange)='onFilterChange($event)' -->
             <div class="col-md-2"><strong>Filtered By : {{filterString}}</strong></div>
         </div>
@@ -33,8 +33,8 @@
                             </td>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr *ngFor='let employee of filteredEmployees | orderBy: key : reverse  | filter:filterString | paginate: { itemsPerPage: 20, currentPage: p }; let i=index;' (click)='onRowSelection(employee)'>
+                    <tbody >
+                        <tr  *ngFor='let employee of filteredEmployees | orderBy: key : reverse  | filter:filterString | paginate: { itemsPerPage: 20, currentPage: p }; let i=index;' (click)='onRowSelection(employee)'>
                             <td>{{i+1}}</td>
                             <td>{{"EMP100"+employee.id}}</td>
                             <td>{{employee.firstName}}</td>
@@ -42,9 +42,13 @@
                             <td>{{employee.lastName}}</td>
                             <td>{{employee.dateOfBirth}}</td>
                         </tr>
+                        <tr [ngClass]='filteredEmployees.length === 0 ? "showMe" : "hideMe"'>
+                             <td colspan="6">Oops..!! No record found.</td>
+                        </tr>
                     </tbody>
                     <pagination-controls (pageChange)="p = $event"></pagination-controls>
                 </table>
+               
             </div>
             <div class="col-md-4">
                 <employee-details [employee]='selectedEmployee' (notify)='onNotify($event)' [employees]='employees'></employee-details>

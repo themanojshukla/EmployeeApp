@@ -5,3 +5,9 @@ thead>tr>td {
 .tHeader{
     cursor: pointer; 
 }
+.showMe{
+    display:table-row;
+}
+.hideMe{
+    display:none;
+}
