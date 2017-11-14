@@ -76,7 +76,7 @@ export class EmployeeDetailsComponent {
     var temp : any[]= this.employees;
     var index = temp.findIndex((obj => obj.id == id ));
     temp.splice(index, 1);
-    console.log(temp);
+    //console.log(temp);
     this.notify.emit(temp);
    }
 

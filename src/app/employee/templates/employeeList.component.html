@@ -5,7 +5,7 @@
     <div class="panel-body">
         <div class="row">
             <div class="col-md-2"><button class="btn btn-primary" (click)="onRowSelection(null)">+ Add New Employee</button></div> 
-            <div class="col-md-4">&nbsp;&nbsp;Filter By : <input [(ngModel)]='filterString'  type="text" /></div>
+            <div class="col-md-4">&nbsp;&nbsp;Filter By : <input (ngModelChange)="onFilterChange($event)" [(ngModel)]='filterString'   type="text" /></div>
             <!-- (ngModelChange)='onFilterChange($event)' -->
             <div class="col-md-2"><strong>Filtered By : {{filterString}}</strong></div>
         </div>
@@ -34,7 +34,8 @@
                         </tr>
                     </thead>
                     <tbody >
-                        <tr  *ngFor='let employee of filteredEmployees | orderBy: key : reverse  | filter:filterString | paginate: { itemsPerPage: 20, currentPage: p }; let i=index;' (click)='onRowSelection(employee)'>
+                        <!--  filter:filterString | -->
+                        <tr  *ngFor='let employee of filteredEmployees | orderBy: key : reverse  | paginate: { itemsPerPage: 20, currentPage: p }; let i=index;' (click)='onRowSelection(employee)'>
                             <td>{{i+1}}</td>
                             <td>{{"EMP100"+employee.id}}</td>
                             <td>{{employee.firstName}}</td>
